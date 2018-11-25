@@ -209,7 +209,7 @@ function createJob(){
   job.lunch = schedule.scheduleJob(rule, function(){
     pushMessage('lunch');
   });
-  
+ 
   
   //dinner (19.00 GMT+7)
   rule = new schedule.RecurrenceRule();
