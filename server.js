@@ -153,6 +153,14 @@ function pushMessage(category='morning'){
               'text': 'Have a nice lunch ' + salute[Math.round(Math.random()*salute.length)] + '~~'
             });
           }
+        
+          //apend message for dinner greeting
+          else if(category=='dinner'){
+            messages.push({
+              'type': 'text',
+              'text': 'Hope you have a nice dinner ' + salute[Math.round(Math.random()*salute.length)] + ':]'
+            });
+          }
           
           //apend message for night greeting
           else if(category=='night'){
@@ -185,11 +193,11 @@ function pushMessage(category='morning'){
 function createJob(){
   var rule;
   
-  //morning (8.30 GMT+7)
+  //morning (08.00 GMT+7)
   rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
   rule.hour = 1;
-  rule.minute = 30;
+  rule.minute = 0;
   job.morning = schedule.scheduleJob(rule, function(){
     pushMessage('morning');
   });
@@ -198,8 +206,8 @@ function createJob(){
   //lunch (12.00 GMT+7)
   rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
-  rule.hour = 5;
-  rule.minute = 0;
+  rule.hour = 5; //5
+  rule.minute = 0; //0
   job.lunch = schedule.scheduleJob(rule, function(){
     pushMessage('lunch');
   });
@@ -208,8 +216,8 @@ function createJob(){
   //dinner (19.00 GMT+7)
   rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
-  rule.hour = 12;
-  rule.minute = 0;
+  rule.hour = 12; //12
+  rule.minute = 0; //0
   job.lunch = schedule.scheduleJob(rule, function(){
     pushMessage('dinner');
   });
@@ -218,8 +226,8 @@ function createJob(){
   //night (21.00 GMT+7)
   rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
-  rule.hour = 14;
-  rule.minute = 0;
+  rule.hour = 14; //14
+  rule.minute = 0; //0
   job.night = schedule.scheduleJob(rule, function(){
     pushMessage('night');
   });
@@ -252,7 +260,7 @@ function handleEvent(event) {
   }
   
   //if user type "subscribe", subscribe him to message queue
-  if(event.message.text == "subscribe"){
+  if(event.message.text.toLowerCase() == "subscribe"){
     var profileId = event.source.userId;
     
     var d = new Date();
@@ -269,7 +277,7 @@ function handleEvent(event) {
   }
   
   //if user decided to stop the subscription, delete his data in firebase
-  if(event.message.text == "stop subscribe" || event.message.text == "stop"){
+  if(event.message.text.toLowerCase() == "stop subscribe" || event.message.text.toLowerCase() == "stop" || event.message.text.toLowerCase() == "stop_subscribe"){
      cancelJob(event.source.userId);
     
     return client.replyMessage(event.replyToken, {type: 'text', text: 'ok, ok. I won\'t send any cute message again.\nchill, man :|'});
