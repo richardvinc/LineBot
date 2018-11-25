@@ -91,11 +91,9 @@ function getImageUrl(){
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2F60871698.jpg?1543077630787",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fnani1.jpg?1543077331686",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2F6986c7555a4621d32301f03fa16376ff60527032.jpg?1543077632847",
-    "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fnani2i-LNAww.jpg?1543077660283",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fa9f.jpg?1543077648049",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fa7b5j3.jpg?1543077646883",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fa2401f86055fff35cedd47e8fa4d41a1.jpg?1543077647037",
-    "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2F324f6092e3e4ec1a689642757a59251529637920_hq.jpg?1543077632892",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fnani-5aa6e8.jpg?1543077660538",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fnani-5af051.jpg?1543077661317",
     "https://cdn.glitch.com/18774b30-7ad2-4c8c-8cfd-17f22df15b69%2Fhqdefault.jpg?1543077661631",
@@ -129,8 +127,8 @@ function pushMessage(category='morning'){
           var messages = [];
           messages.push({
             "type": "image",
-            "originalContentUrl": response.data.urls.thumb,
-            "previewImageUrl": response.data.urls.thumb
+            "originalContentUrl": response.data.urls.regular,
+            "previewImageUrl": response.data.urls.small
           });
           
           //apend message for morning greeting
@@ -211,7 +209,7 @@ function createJob(){
   job.lunch = schedule.scheduleJob(rule, function(){
     pushMessage('lunch');
   });
-  
+ 
   
   //dinner (19.00 GMT+7)
   rule = new schedule.RecurrenceRule();
